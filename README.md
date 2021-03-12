@@ -11,3 +11,8 @@
 - 09: Sound Board
 - 10: Dad Joke Generator
 - 11: Key Codes
+- 12: FAQ Collapse
+- 13: Random Choice Picker
+- 14: Animated Navigation
+- 15: Incrementing Counter
+- 16: Drink Water
