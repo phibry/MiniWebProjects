@@ -1,39 +1,47 @@
+// Create Drag Class
+class Drag {
+  dragStart() {
+    this.className += ' hold';
+    setTimeout(() => (this.className = 'invisible'), 0);
+  }
+
+  dragEnd() {
+    this.className = 'fill';
+  }
+
+  dragOver(e) {
+    e.preventDefault();
+  }
+
+  dragEnter(e) {
+    e.preventDefault();
+    this.className += ' hovered';
+  }
+
+  dragLeave() {
+    this.className = 'empty';
+  }
+
+  dragDrop() {
+    this.className = 'empty';
+    this.append(fill);
+  }
+}
+
+// Get elements
 const fill = document.querySelector('.fill');
 const empties = document.querySelectorAll('.empty');
 
-fill.addEventListener('dragstart', dragStart);
-fill.addEventListener('dragend', dragEnd);
+// Initialize Drag Class
+const drag = new Drag();
 
-for (const empty of empties) {
-  empty.addEventListener('dragover', dragOver);
-  empty.addEventListener('dragenter', dragEnter);
-  empty.addEventListener('dragleave', dragLeave);
-  empty.addEventListener('drop', dragDrop);
-}
+// Eventlistener
+fill.addEventListener('dragstart', drag.dragStart);
+fill.addEventListener('dragend', drag.dragEnd);
 
-function dragStart() {
-  this.className += ' hold';
-  setTimeout(() => (this.className = 'invisible'), 0);
-}
-
-function dragEnd() {
-  this.className = 'fill';
-}
-
-function dragOver(e) {
-  e.preventDefault();
-}
-
-function dragEnter(e) {
-  e.preventDefault();
-  this.className += ' hovered';
-}
-
-function dragLeave() {
-  this.className = 'empty';
-}
-
-function dragDrop() {
-  this.className = 'empty';
-  this.append(fill);
-}
+empties.forEach((empty) => {
+  empty.addEventListener('dragover', drag.dragOver);
+  empty.addEventListener('dragenter', drag.dragEnter);
+  empty.addEventListener('dragleave', drag.dragLeave);
+  empty.addEventListener('drop', drag.dragDrop);
+});
